@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Blockchain</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function checkInput() {
+            var inputx = document.forms["inputForm"]["inputValue"].value;
+            if (isNaN(inputx) || inputx == "") {
+                alert("Input value Must numbers");
+                return false;
+            }
+        }
+
+        function checkSearch() {
+            var searchx = document.forms["searchForm"]["searchValue"].value;
+            if (isNaN(searchx) || searchx == "") {
+                alert("Search value Must numbers");
+                return false;
+            }
+        }
+
+        function checkDelete() {
+            var deletex = document.forms["deleteForm"]["deleteValue"].value;
+            if (isNaN(deletex) || deletex == "") {
+                alert("Delete value Must numbers");
+                return false;
+            }
+        }
+    </script>
+    <h3>Welcome to DynamicArray from Blockchain Data</h3>
+    <h1>Account Address: <img src="{{url_for('static', filename='images/'+value0+'.png')}}" align="middle" /> {{ value0 }}
+        <img src="{{url_for('static', filename='images/'+value0+'_qrcode.png')}}" align="middle" />
+    </h1>
+    <h1>Greeting Data: {{ value1 }}</h1>
+    <h1>Data Length: {{ value2 }}</h1>
+    <h1>Data Contents: {{ value3 }}</h1>
+    <h1>Data Sums: {{ value4 }}</h1>
+    <form name="inputForm" action="/inputdata" onsubmit="return checkInput()" method="post">
+        <div class="form-group">
+            <label for="inputValue"><h2>Add New Values: </h2></label> {% for message in get_flashed_messages(category_filter=['add']) %}
+            <p>{{ message }}</p> {% endfor %}
+            <textarea name="inputValue" placeholder="New Values" class="form-control">{{ request.form['inputValue'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+    <form name="searchForm" action="/searchdata" onsubmit="return checkSearch()" method="post">
+        <div class="form-group">
+            <label for="searchValue"><h2>Search Values: </h2></label> {% for message in get_flashed_messages(category_filter=['search']) %}
+            <p>{{ message }}</p> {% endfor %}
+            <textarea name="searchValue" placeholder="Search Values" class="form-control">{{ request.form['searchValue'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+    <form name="deleteForm" action="/deletedata" onsubmit="return checkDelete()" method="post">
+        <div class="form-group">
+            <label for="deleteValue"><h2>Delete Values: </h2></label> {% for message in get_flashed_messages(category_filter=['delete']) %}
+            <p>{{ message }}</p> {% endfor %}
+            <textarea name="deleteValue" placeholder="Delete Values" class="form-control">{{ request.form['deleteValue'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Delete</button>
+        </div>
+    </form>
+</body>
+
+</html>
